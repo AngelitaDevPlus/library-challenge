@@ -11,7 +11,7 @@ public class DataConversion implements IDataConversion {
         try {
             return objectMapper.readValue(json, tClass);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

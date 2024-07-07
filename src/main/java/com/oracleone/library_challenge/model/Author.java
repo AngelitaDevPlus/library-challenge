@@ -21,10 +21,10 @@ public class Author {
     public Author() {
     }
 
-    public Author(AuthorData authorData) {
-        this.name = authorData.name();
-        this.birthYear = authorData.birthYear();
-        this.deathYear = authorData.deathYear();
+    public Author(String name, Integer birthYear, Integer deathYear) {
+        this.name = name;
+        this.birthYear = birthYear;
+        this.deathYear = deathYear;
     }
 
     public void setBookList(List<Book> bookList) {
@@ -70,13 +70,22 @@ public class Author {
 
     @Override
     public String toString() {
-        return "-----------------------------------------------------------\n" +
-                "Author id: " + id + "\n" +
-                "Name: " + name + "\n" +
-                "Birth Year: " + birthYear + "\n" +
-                "Death Year: " + deathYear + "\n" +
-                "bookList: " + "\n" +
-                bookList.stream().map(Book::getTitle).toList() + "\n" +
-                "-----------------------------------------------------------\n";
+        if(!(bookList == null)) {
+            return "-----------------------------------------------------------\n" +
+                    "Author id: " + id + "\n" +
+                    "Name: " + name + "\n" +
+                    "Birth Year: " + birthYear + "\n" +
+                    "Death Year: " + deathYear + "\n" +
+                    "bookList: " + "\n" +
+                    bookList.stream().map(Book::getTitle).toList() + "\n" +
+                    "-----------------------------------------------------------\n";
+        } else {
+            return "-----------------------------------------------------------\n" +
+                    "Author id: " + id + "\n" +
+                    "Name: " + name + "\n" +
+                    "Birth Year: " + birthYear + "\n" +
+                    "Death Year: " + deathYear + "\n" +
+                    "-----------------------------------------------------------\n";
+        }
     }
 }

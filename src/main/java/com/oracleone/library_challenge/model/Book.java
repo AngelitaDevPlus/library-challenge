@@ -14,7 +14,7 @@ public class Book {
     @JoinColumn(name = "authors_id")
     private Author author;
     @Enumerated(EnumType.STRING)
-    private String language;
+    private Languages language;
     private Double downloadCount;
 
     public Book() {
@@ -22,9 +22,15 @@ public class Book {
 
     public Book(BookData bookData) {
         this.title = bookData.title();
-        this.author = new Author(bookData.authorDataList().get(0));
-        this.language = String.valueOf(Languages.fromString(bookData.languagesList().get(0)));
+        //this.author =
+        this.language = Languages.fromString(bookData.languagesList().get(0));
         this.downloadCount = bookData.downloadCount();
+    }
+
+    public Author fromListToAuthor(BookData bookData){
+        return new Author(bookData.authorDataList().get(0).name(),
+                bookData.authorDataList().get(0).birthYear(),
+                bookData.authorDataList().get(0).deathYear());
     }
 
     public Long getId() {
@@ -51,11 +57,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getLanguage() {
+    public Languages getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(Languages language) {
         this.language = language;
     }
 
@@ -72,9 +78,9 @@ public class Book {
         return "-----------------------------------------------------------\n" +
                 "Book id: " + id + "\n" +
                 "Title: " + title + "\n" +
-                "Author: " + author.getClass().getName() + "\n" +
                 "Language: " + language + "\n" +
                 "Download Count: " + downloadCount + "\n" +
+                 author.toString() + "\n" +
                 "-----------------------------------------------------------\n";
     }
 }
